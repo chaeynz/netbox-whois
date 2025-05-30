@@ -1,0 +1,13 @@
+{%- for as in ases -%}
+aut-num: {{ as.display }}
+as-name: {{ as.tenant.name | default('No Tenant') }}
+descr: {{ as.description }}
+org: {{ 'My Org' }}
+mnt-by: {{ 'empty' }}
+admin-c: {{ 'empty' }}
+tech-c: {{ 'empty' }}
+status: ASSIGNED
+remarks: {{ 'empty' }}
+source: {{ 'LABWHOIS' }}
+
+{% endfor %}
