@@ -15,13 +15,13 @@ GLHF <3
 * ⚡ WHOIS server (RFC 3912 compliant and cute af UwU)
 * 🧾 Jinja2 templated WHOIS responses (so modern, much wow ✨)
 * 🔌 Plugs into NetBox via its API (yup mhhmm :3)
-* 🐳 Docker-ready (? i hope QwQ)
+* 🐳 Docker-ready (containers are the future bro ^w^)
 
 ---
 
 ## 📦 How It Works
 
-1. The server listens for WHOIS queries (e.g., `64530`).
+1. The server listens for WHOIS queries (e.g., `65000`).
 2. It validates the input using a list of `validators`.
 3. It queries NetBox for the query using `pynetbox`.
 4. A RPSL-style response is rendered with `jinja2` and sent back to the client.
