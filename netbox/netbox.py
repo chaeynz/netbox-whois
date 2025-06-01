@@ -1,6 +1,6 @@
 import os
 import pynetbox
-from jinja2 import Template, Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader
 
 j2env = Environment(loader=FileSystemLoader("templates"))
 TEMPLATE = j2env.get_template('whois.j2')

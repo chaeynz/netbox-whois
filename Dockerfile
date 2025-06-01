@@ -1,13 +1,23 @@
-FROM python:3.13
+FROM python:3.13-alpine AS builder
+RUN apk add --no-cache gcc musl-dev libffi-dev
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+
+FROM python:3.13-alpine
 WORKDIR /app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apk add --no-cache libffi && adduser -D -u 1000 appuser
+WORKDIR /app
+COPY --from=builder --chown=appuser:appuser /root/.local /home/appuser/.local
+COPY --chown=appuser:appuser netbox ./netbox
+COPY --chown=appuser:appuser server.py .
+COPY --chown=appuser:appuser templates ./templates
+COPY --chown=appuser:appuser validators ./validators
 
-COPY netbox.py .
-COPY server.py .
-COPY templates ./templates
+USER appuser
 
 EXPOSE 4343
 
-ENTRYPOINT ["python3", "server.py"]
+CMD ["python3", "server.py"]
